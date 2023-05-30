@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+                     <form  method="post" action="{% url 'saveproduct' %}"enctype="multipart/form-data">
+                 {% csrf_token %}
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Category:</label>
+							<div class="col-sm-12 col-md-10">
+								<select name="cname">
+									<option>Select Category</option>
+									{% for i in data %}
+								    <option>{{i.Name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+                        </div><br><br>
+						 <div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Product Name:</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Enter Product Name" name="pname">
+							</div>
+                         </div><br><br>
+                         <div class="form-group">
+							<label>Description:</label>
+							<textarea style="width:100%" class="form-control" name="description"></textarea>
+						 </div><br><br>
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Quantity</label>
+							<div class="col-sm-12 col-md-10">
+								<input  class="form-control" value="0" type="number" name="quantity">
+							</div>
+						</div>
+                         <div class="form-group">
+							<label>Price:</label>
+							<input type="text" style="width:100%" class="form-control" name="price">
+						 </div><br><br>
+                        <div>
+                        <label>Choose an Image:</label>
+                        <input type="file" name="img">
+						</div>
+	                    <button type="submit" class="btn btn-outline-primary">Click Here</button>
+					</form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ {% if messages %}
+ {% for i in messages %}
+
+  {% if i.tags == 'warning' %}
+  <script>
+	  swal('{{message}}','','warning');
+
+  </script>
+  {% elif i.tags == 'error' %}
+  <script>
+      swal('{{message}}','','error');
+  </script>
+   {% else %}
+  <script>
+	  swal('{{message}}','','success');
+  </script>
+   {% endif %}
+{% endfor %} {% endif %}
+
+
+</body>
+</html>
+{% endblock %}

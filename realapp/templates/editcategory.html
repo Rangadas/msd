@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form methodaction="{% url 'updatecategory' dataid=data.id %}="post" "enctype="multipart/form-data">
+     {% csrf_token %}
+						<div class="form-group row">
+							<label class="col-sm-12 col-md-2 col-form-label">Name:</label>
+							<div class="col-sm-12 col-md-10">
+								<input class="form-control" type="text" placeholder="Enter Category Name" name="name" value="{{data.Name}}">
+							</div>
+                        </div><br><br>
+						<div class="form-group">
+							<label>Description:</label>
+							<textarea style="width:100%" class="form-control" name="desc" >{{data.Description}}</textarea>
+						</div><br><br>
+                        <label>Choose an Image:</label>
+	                    <img src="{{data.Image.url}}" width="100px" height="100px">
+                        <input type="file" name="image">
+						</div>
+	                    <button type="submit" class="btn btn-outline-primary">Click Here</button>
+					</form>
+
+
+</body>
+</html>
+{% endblock %}
